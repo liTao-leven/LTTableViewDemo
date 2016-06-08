@@ -1,7 +1,8 @@
 # LTTableViewDemo
 优雅的创建TableView<Br/>
-目前只完成了基本功能
-代码示例:
+## 目前只完成了基本功能
+## 代码示例:
+```
 .lt_registered_cell(@[[UITableViewCell class]])//注册cell
     .lt_section(3)//分区
     .lt_row(^NSInteger(NSInteger section){
@@ -15,5 +16,5 @@
         return cell;
     })
     ;
-    
-链式语法完成TableView的创建
+```
+## 链式语法完成TableView的创建
