@@ -1,5 +1,5 @@
 # LTTableViewDemo
-优雅的创建TableView
+优雅的创建TableView<Br/>
 目前只完成了基本功能
 代码示例:
 .lt_registered_cell(@[[UITableViewCell class]])//注册cell
