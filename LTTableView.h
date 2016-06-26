@@ -25,8 +25,6 @@
  */
 -(LTTableView*(^)(UITableViewCell*(^)(NSIndexPath*)))lt_cell;
 
-
-
 /**
  *  注册cell  数组中是cell的class
  */
@@ -36,4 +34,15 @@
  *  通过类名str取出cell
  */
 -(UITableViewCell* (^)(NSString*))lt_take_cell;
+
+/**
+ *  点击cell回调
+ */
+-(LTTableView*(^)(void (^)(NSIndexPath*)))lt_selectRowIndex;
+
+/**
+ *  设置每个cell高度
+ */
+-(LTTableView*(^)(CGFloat (^)(NSIndexPath*)))lt_rowHeightIndex;
+
 @end

@@ -1,6 +1,10 @@
 # LTTableViewDemo
 优雅的创建TableView<Br/>
+<<<<<<< Updated upstream
 ## 目前只完成了基本功能
+=======
+目前只完成了基本功能<Br/>
+>>>>>>> Stashed changes
 ## 代码示例:
 ```
 .lt_registered_cell(@[[UITableViewCell class]])//注册cell
@@ -13,7 +17,7 @@
         NSArray* ary = dataSource[index.section];
         UITableViewCell* cell = _tableView.lt_take_cell(@"UITableViewCell");//通过类名取出cell
         cell.textLabel.text = ary[index.row];
-        return cell;
+        retursn cell;
     })
     ;
 ```

@@ -8,10 +8,28 @@
 
 #import "LTTableView.h"
 @interface LTTableView()<UITableViewDataSource,UITableViewDelegate>
+/**
+ *  区数
+ */
 @property(nonatomic,assign)NSInteger section;
-
+/**
+ *  设置每个区cell个数
+ */
 @property(nonatomic,strong)NSInteger (^rowInsection)(NSInteger);
+/**
+ *  设置每个cell
+ */
 @property(nonatomic,strong)UITableViewCell*(^cellAtIndex)(NSIndexPath*);
+
+/**
+ *  点击cell回调
+ */
+@property(nonatomic,strong)void(^selectRowAtIndex)(NSIndexPath*);
+
+/**
+ *  每个cell的高度
+ */
+@property(nonatomic,strong)CGFloat(^rowHeightIndex)(NSIndexPath*);
 
 @end
 @implementation LTTableView
@@ -42,7 +60,9 @@
     };
 }
 
-
+/**
+ *  设置分区数
+ */
 -(LTTableView* (^)(NSInteger))lt_section{
     return ^LTTableView*(NSInteger section){
         self.section = section;
@@ -50,7 +70,9 @@
     };
 }
 
-
+/**
+ *  设置每个区行数
+ */
 -(LTTableView*(^)(NSInteger (^)(NSInteger)))lt_row{
     return ^LTTableView*(NSInteger (^rowInsection)(NSInteger)){
         self.rowInsection = rowInsection;
@@ -58,7 +80,9 @@
     };
 }
 
-
+/**
+ *  设置每个cell
+ */
 -(LTTableView*(^)(UITableViewCell*(^)(NSIndexPath*)))lt_cell{
     return ^LTTableView*(UITableViewCell*(^cellAtIndex)(NSIndexPath*)){
         self.cellAtIndex = cellAtIndex;
@@ -67,6 +91,27 @@
 }
 
 
+/**
+ *  点击cell回调
+ */
+-(LTTableView*(^)(void (^)(NSIndexPath*)))lt_selectRowIndex{
+    return ^LTTableView*(void (^selectRowIndex)(NSIndexPath*)){
+        self.selectRowAtIndex = selectRowIndex;
+        return self;
+    };
+}
+
+/**
+ *  设置每个cell高度
+ */
+-(LTTableView*(^)(CGFloat (^)(NSIndexPath*)))lt_rowHeightIndex{
+    return ^LTTableView*(CGFloat (^rowHeightIndex)(NSIndexPath*)){
+        self.rowHeightIndex = rowHeightIndex;
+        return self;
+    };
+}
+
+#pragma mark - <UITableViewDelegate,UITableViewDataSource>
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.section;
 }
@@ -86,6 +131,21 @@
     }
     else{
         return 0;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.selectRowAtIndex) {
+        self.selectRowAtIndex(indexPath);
+    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.rowHeightIndex) {
+        return self.rowHeightIndex(indexPath);
+    }
+    else{
+        return 44.f;
     }
 }
 @end

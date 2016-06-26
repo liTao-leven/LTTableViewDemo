@@ -19,7 +19,6 @@
     [super viewDidLoad];
     NSArray* dataSource = @[@[@"1",@"2",@"3"],@[@"a",@"b",@"c"],@[@"@",@"#"]];
     
-    // Do any additional setup after loading the view, typically from a nib.
     _tableView
     .lt_registered_cell(@[[UITableViewCell class]])//注册cell
     .lt_section(3)//分区
@@ -33,6 +32,9 @@
         cell.textLabel.text = ary[index.row];
         return cell;
     })
+    .lt_selectRowIndex(^(NSIndexPath* path){
+        NSLog(@"点击了secttion:%ld,row:%ld",path.section,path.row);
+    });
     ;
 }
 
